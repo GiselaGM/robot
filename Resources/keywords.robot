@@ -10,13 +10,14 @@ Load page
     Go To                       ${URL}
 
 Verify page loaded
-    Wait Until Page Contains    Your Amazon.com
+    ${link_text} = 		        Get Text  id:nav-your-amazon
+    Should Be Equal		        ${link_text}
 
 Search for Product
-    [Arguments]                 ${search_term}  ${search_result}
+    [Arguments]                 ${search_term}
     Enter search term           ${search_term}
     Submit search
-    Verify search completed     ${search_result}
+    Verify search completed     ${search_term}
 
 Enter search term
     [Arguments]                 ${search_term}
@@ -28,7 +29,7 @@ Submit search
 Verify search completed
     [Arguments]                     ${search_term}
     ${actual_term}                  Get Text  xpath://*[@id="search"]/span/span/h1/div/[1]/div/div/span[3]
-    Shoult Be Equal                 "${search_term}" @{actual_term}
+    Should Be Equal                 "${search_term}" @{actual_term}
 
 End Web Test
     Close Browser
